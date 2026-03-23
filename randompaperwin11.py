@@ -3,19 +3,35 @@ import os
 import ctypes
 usrname = os.getlogin()
 home = f"C://Users/{usrname}"
+home1 = f"C://Users/{usrname}"
 check = 0
 nope = ['no', 'nah', 'n', '0']
 
 extractcmd = f'tar -xf ./backgrounds.zip -C "{home}/Pictures"'
+
+
 try:
-    with open(f"{home}/Documents/statusbgrandom.txt", mode = 'rt') as file1:
+    with open(f"{home}/OneDrive/Documents/statusbgrandom.txt", mode = 'rt') as file1:
         for line in file1:
             check += int(line)
         print(check)
 except FileNotFoundError:
-    x = input("This program will extract roughly 100-200 megabytes of data to your Pictures folder. Rest assured, these are all photos. If you want to use your own backgrounds, answer 'NO'(letter for letter, fully capitalized), and then replicate the folder structure that is printed to the console, before placing your images in the appropriate folders.")
-    if x == 'NO':
-        print('''~/Pictures-
+
+    try:
+        with open(f"{home}/Documents/statusbgrandom.txt", mode = 'rt') as file1:
+            for line in file1:
+                check += int(line)
+            print(check)
+    except FileNotFoundError:
+        check = input("Do you have OneDrive?(Y/n) ").lower()
+        if check in nope:
+            os.system(f'mkdir "{home1}/Pictures"')
+        else:
+            os.system(f'mkdir "{home1}/Pictures"')
+            home += '/OneDrive'
+        x = input("This program will extract roughly 100-200 megabytes of data to your Pictures folder. Rest assured, these are all photos. If you want to use your own backgrounds, answer 'NO'(letter for letter, fully capitalized), and then replicate the folder structure that is printed to the console, before placing your images in the appropriate folders.")
+        if x == 'NO':
+            print('''~/Pictures-
     -backgrounds
         -landscapes
         -minimalscape
@@ -23,26 +39,22 @@ except FileNotFoundError:
         -flowy
         -space
         -cityscapes
-''')
-        input("Click [ENTER] when you have finished creating the appropriate file structure and uploaded your images.")
-        os.system(f'echo 1 >> "{home}/statusbgrandom.txt"')
-    else:
-        os.system(f'echo 1 >> "{home}/Documents/statusbgrandom.txt"')
-        check = input("Is your pictures folder stored in OneDrive?.(Y/n) ").lower()
-        if check in nope:
-            os.system(f'mkdir "{home}/Pictures"')
+    ''')
+            input("Click [ENTER] when you have finished creating the appropriate file structure and uploaded your images.")
+            os.system(f'echo 1 >> "{home}/OneDrive/statusbgrandom.txt"')
         else:
-            home += 'OneDrive'
-        os.system(f'{extractcmd}')
-        os.system(f'echo 1 >> "{home}/Documents/statusbgrandom.txt"')
+            os.system(f'{extractcmd}')
+            os.system(f'echo 1 >> "{home}/Documents/statusbgrandom.txt"')
+        
+        
 
 
-landscapes = home + '/Pictures/backgrounds/landscapes/'
-minimalscapes = home + '/Pictures/backgrounds/minimalscape/'
-geometric = home + '/Pictures/backgrounds/geometric/'
-flowy = home + '/Pictures/backgrounds/flowy/'
-space = home + '/Pictures/backgrounds/space/'
-cityscapes = home + '/Pictures/backgrounds/cityscapes/'
+landscapes = home1 + '/Pictures/backgrounds/landscapes/'
+minimalscapes = home1 + '/Pictures/backgrounds/minimalscape/'
+geometric = home1 + '/Pictures/backgrounds/geometric/'
+flowy = home1 + '/Pictures/backgrounds/flowy/'
+space = home1 + '/Pictures/backgrounds/space/'
+cityscapes = home1 + '/Pictures/backgrounds/cityscapes/'
 
 
 folderls = [
