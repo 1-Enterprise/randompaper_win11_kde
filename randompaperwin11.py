@@ -23,7 +23,7 @@ except FileNotFoundError:
                 check += int(line)
             print(check)
     except FileNotFoundError:
-        check = input("Do you have OneDrive?(Y/n) ").lower()
+        check = input("Is your Documents folder in OneDrive?(Y/n) ").lower()
         if check in nope:
             os.system(f'mkdir "{home1}/Pictures"')
         else:
